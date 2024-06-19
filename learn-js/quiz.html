@@ -1,0 +1,32 @@
+<script>
+  var solution = 10;
+  var input = prompt('Guess Number');
+  console.log(input);
+
+  if (input > solution + 2) {
+    alert('The number is less than you wrote down');
+  } else if (input < solution - 2) {
+    alert('The number is more than you wrote down');
+  } else {
+    // 8 ~ 12 사이의 값
+    if (input == solution) {
+      alert('Correct!');
+    } else {
+      alert("That's close");
+    }
+  }
+
+  var gender = prompt('Write down your gender');
+  switch (gender) {
+    case 'F':
+      alert('Female');
+      break;
+    case 'M':
+      alert('Male');
+      break;
+    case 'Well':
+      alert('Others');
+    default:
+      alert('Please write down!');
+  }
+</script>

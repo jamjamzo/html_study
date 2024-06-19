@@ -1,0 +1,35 @@
+<script>
+  var list = [
+    {
+      question: 'What is your favorite fruits?',
+      options: ['apple', 'grape', 'orange', 'banana', 'strawberry'],
+    },
+    {
+      question: 'What is your favorite food?',
+      options: ['pasta', 'kalbi', 'ramyeon', 'sandwich', 'cake'],
+    },
+    {
+      question: 'What is your favorite pet?',
+      options: ['dog', 'cat', 'bird', 'spider', 'rabbit'],
+    },
+  ];
+
+  console.log(list);
+
+  for (var i = 0; i < list.length; i++) {
+    var questionMessage = list[i].question + '\n'; //question 불러오는 변수 설정
+    for (var j = 0; j < list[i].options.length; j++) {
+      questionMessage += j + 1 + '. ' + list[i].options[j] + '\n';
+    }
+
+    console.log(questionMessage);
+    list[i].answer = prompt(questionMessage);
+  }
+
+  for (var i = 0; i < list.length; i++) {
+    var index = parseInt(list[i].answer); //parseInt : 문자형 -> 정수 변환
+    var message =
+      list[i].question + '\nYour choice : ' + list[i].options[index - 1]; //alert : 창을 띄어줌
+    alert(message);
+  }
+</script>
