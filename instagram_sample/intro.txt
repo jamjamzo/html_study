@@ -1,0 +1,72 @@
+<인스타그램 카드 만들기>
+
+*새로 배우는 CSS
+- opacity(투명도 조정) : 0.5
+- transform(Y축 방향으로 객체 이동) : taranslateY(-50%)
+- box-sizing : border-box;
+
+*응용할 태그의 attribute
+- data : 태그에 변수 값을 저장해두기 위해 사용
+  => 캐러셀에서 현재 보여지는 이미지의 순번을 값으로 저장
+
+* 프로젝트/이미지 준비
+- images : icon/images 모음
+- script : js, html
+- styles : css
+
+* 레이아웃 구조
+- article : 전체 카드
+- header : 계정정보
+  - .circle-image : 계정 사진(border-radius :50%;둥글게)
+  - .card-username : 계정 아이디
+  - .option-more : 옵션(...)
+- main : 사진 및 내용 정보
+  - .carousel : 사진
+    - div(overflow-x: hidden) : 전체 이미지를 감싸는 태그, 지정 x축 넘어가면 가려지는 옵션 사용
+      - position:relative 좌표 설정**
+    - ul : 전체 이미지들을 수평으로 늘어뜨림
+    - li : 고정너비 설정
+    - .slide .slide-right : 수평으로 늘어뜨린 이미지를 오른쪽으로 이동한다.
+    - .slide .slide-left : 수평으로 늘어뜨린 이미지를 왼쪽으로 이동한다.
+  - .card-container 
+    - .card-buttons : 좋아요, 댓글, 메시지보내기 아이콘들
+    - .card-likes : 좋아요 개수
+    - .card-content : 댓글 내용
+    - .card-time : 카드 업로드한 시간
+- footer.card-comment : 댓글
+  - input : 댓글 입력창
+    - div > button : 게시버튼
+
+
+* 자바스크립트 로직
+- 페이지 로딩 완료시 : window(load)
+  - 캐러셀의 ul 너비값을 li 개수만큼 조정(li의 width<600px>*이미지개수)
+  - 화면 내의 모든 캐러셀에 각각 캐러셀 이벤트를 등록
+    - 슬라이드 왼쪽, 슬라이드 오른쪽
+
+- 슬라이드 버튼 클릭시(1)
+  - event.currentTarget으로 클릭이 발생된 슬라이드 버튼 가져옴(left or right)
+  - 이미지의 개수를 가져옴 (li의 수를 카운트)
+  - .carousel의 data 속성에서 현재 이미지 index를 가져옴
+  - 오른쪽 클릭이고 오른쪽에 남은 이미지가 있다면 
+    - 현재 이미지 index를 1증가시키고
+    - 오른쪽 방향으로 스크롤
+  - 왼쪽 클릭이고 왼쪽에 남은 이미지가 있다면
+    - 현재 이미지 index를 1감소시키고
+    - 왼쪽 방향으로 스크롤
+
+- 슬라이드 버튼 클릭시(2)
+  - 인디케이터를 현재 이미지 Index에 맞게 조정
+    - 현재 이미지 index와 일치하는 순번에 div에만 class 속성으로 active값을 부여
+  - 슬라이드 버튼을 현재 이미지 index에 맞게 숨기거나 보여줌
+  - 맨 오른쪽 이미지라면, 오른쪽 버튼이 display:none; 그렇지 않으면 
+  display:block;
+    - 맨 왼쪽 이미지라면, 왼쪽 버튼이 display:none; 그렇지 않으면 display:block;
+  - 현재 이미지 index를 .carousel의 data 속성에 업데이트
+
+  - 스크롤 로직
+    - ul 상위의 div 요소를 가져옴
+    - li 하나의 너비 (600px)를 가져옴
+    - 이미지 index * li 너비 = 새 스크롤 x 위치
+    - HTMLElement.scrollTo 함수를 사용해서 div 요소를 새 스크롤 x 위치로 스크롤 함 
+      - <div 요소>.scrollTo({left:새 스크롤x위치, bahavior:'smooth'});  
