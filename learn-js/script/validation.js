@@ -3,6 +3,15 @@ window.addEventListener('load', function () {
 
   var formElem = document.querySelector('form');
   formElem.onsubmit = submitForm;
+
+  // 월 추가
+  var selectInput = document.querySelector('select[name="birth-month"]');
+  for (var i = 1; i <= 12; i++) {
+    var option = document.createElement('option');
+    option.innerHTML = i + '월';
+    option.value = i;
+    selectInput.appendChild(option);
+  }
 });
 
 // alert-message "TEST" 지우기
@@ -33,7 +42,8 @@ function submitForm() {
   //select, radio, checkbox
   var nameInput = document.querySelector('input[id="id-name"]');
   var yearInput = document.querySelector('input[name="birth-year"]');
-  var selectInput = document.querySelector('select[name="birth-month"]');
+  //위에 월추가 했으므로 옮기겠음
+  // var selectInput = document.querySelector('select[name="birth-month"]');
   var dayInput = document.querySelector('input[name="birth-day"]');
   var radioInput = document.querySelector('input[name="gender"]:checked');
   var checkInput = document.querySelector('input[name="agree"]');
@@ -50,9 +60,22 @@ function submitForm() {
   console.log(radioInput.value);
   console.log(checkInput.value);
 
+  var success = true;
+
   if (accountInput.value.length < 6) {
     showMessage(accountInput, 'Fill out the blank more than 6 words.');
+    success = false;
   }
 
-  return false;
+  if (passwordInput.value.length < 10) {
+    showMessage(passwordInput, 'Fill out the blank more than 10 words.');
+    success = false;
+  }
+
+  if (passwordConfirmInput.value != passwordInput.value) {
+    showMessage(passwordConfirmInput, 'Make sure if the password is same.');
+    success = false;
+  }
+
+  return success;
 }

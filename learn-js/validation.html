@@ -17,7 +17,7 @@
   <body>
     <h1>Register</h1>
     <hr />
-    <form action="" method="GET">
+    <form action="validation.html" method="POST">
       <fieldset>
         <legend>Account</legend>
         <div>
@@ -68,9 +68,10 @@
             max="2100"
             required="required"
           />
+          <!--이것은 코드 낭비나 마찬가지이므로 자바스크립트로 바꿔줄 수 있음 validation.js에 7줄에 삽입-->
           <select name="birth-month">
-            <option value="MONTH"></option>
-            <option value="1">JAN</option>
+            <option value="">MONTH</option>
+            <!-- <option value="1">JAN</option>
             <option value="2">FEB</option>
             <option value="3">MAR</option>
             <option value="4">APR</option>
@@ -81,7 +82,7 @@
             <option value="9">SEP</option>
             <option value="10">OCT</option>
             <option value="11">NOV</option>
-            <option value="12">DEC</option>
+            <option value="12">DEC</option> -->
           </select>
           <input
             type="number"
